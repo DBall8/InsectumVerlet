@@ -1,7 +1,6 @@
 #include "container.hpp"
 #include <iostream>
 #include <thread>
-#include "timing.hpp"
 
 const int NUM_THREAD = 4;
 
