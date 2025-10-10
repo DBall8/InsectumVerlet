@@ -1,7 +1,9 @@
 #include "object.hpp"
 #include <iostream>
 
-namespace verlet
+using namespace insectum;
+
+namespace insectum::verlet
 {
     Object::Object(float x, float y, float size):
         position_(Vec2(x, y)),

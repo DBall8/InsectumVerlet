@@ -3,7 +3,7 @@
 #include "object.hpp"
 #include <iostream>
 
-namespace verlet
+namespace insectum::verlet
 {
     class Cell
     {

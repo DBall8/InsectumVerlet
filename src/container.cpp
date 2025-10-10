@@ -4,7 +4,9 @@
 
 const int NUM_THREAD = 4;
 
-namespace verlet
+using namespace insectum;
+
+namespace insectum::verlet
 {
     Container::Container():
         threadPool_(ThreadPool(NUM_THREAD))
@@ -43,37 +45,39 @@ namespace verlet
         cellGrid_.resize(cellSize_, constraint_.width, constraint_.height);
     }
 
-    void Container::addObject(Object o)
+    void Container::addObject(Object* pObject)
     {
-        objects_.push_back(o);
+        objects_.push_back(pObject);
 
-        if (o.getRadius() * 2.0f > cellSize_)
+        if (pObject->getRadius() * 2.0f > cellSize_)
         {
-            cellSize_ = o.getRadius() * 2.0f;
+            cellSize_ = pObject->getRadius() * 2.0f;
             cellGrid_.resize(cellSize_, constraint_.width, constraint_.height);
         }
     }
 
-    void Container::addFixedObject(Object o)
+    void Container::addFixedObject(Object* pObject)
     {
-        o.setFixed(true);
-        addObject(o);
+        pObject->setFixed(true);
+        addObject(pObject);
     }
 
     void Container::applyGravity()
     {
+        if (gravity_ == 0) return;
+        
         float gravityScaled = gravity_ / timeStep_;
-        for (Object& o: objects_)
+        for (Object* pObject: objects_)
         {
-            o.addAcceleration(Vec2(0, gravityScaled));
+            pObject->addAcceleration(Vec2(0, gravityScaled));
         }
     }
 
     void Container::addObjectsToGrid()
     {
-        for (Object& o: objects_)
+        for (Object* pObject: objects_)
         {
-            cellGrid_.addObject(&o);
+            cellGrid_.addObject(pObject);
         }
     }
 
@@ -230,25 +234,25 @@ namespace verlet
     {
         if (constraint_.isCircle)
         {
-            for (Object& o: objects_)
+            for (Object* pObject: objects_)
             {
-                checkCircleConstraint(&o);
+                checkCircleConstraint(pObject);
             }
         }
         else
         {
-            for (Object& o: objects_)
+            for (Object* pObject: objects_)
             {
-                checkRectConstraint(&o);
+                checkRectConstraint(pObject);
             }
         }
     }
 
     void Container::updateObjects(float dt)
     {
-        for (Object& o: objects_)
+        for (Object* pObject: objects_)
         {
-            o.update(dt);
+            pObject->update(dt);
         }
     }
 

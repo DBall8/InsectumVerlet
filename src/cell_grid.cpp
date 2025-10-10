@@ -1,6 +1,8 @@
 #include "cell_grid.hpp"
 
-namespace verlet
+using namespace insectum;
+
+namespace insectum::verlet
 {
     const int CellGrid::getCellIndex(const int x, const int y)
     {
