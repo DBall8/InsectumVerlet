@@ -64,8 +64,7 @@ namespace insectum::verlet
 
     void Container::applyGravity()
     {
-        if (gravity_ == 0) return;
-        
+        if (gravity_ == 0) return; 
         float gravityScaled = gravity_ / timeStep_;
         for (Object* pObject: objects_)
         {

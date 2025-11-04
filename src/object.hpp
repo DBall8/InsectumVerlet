@@ -11,7 +11,7 @@ namespace insectum::verlet
             Object(insectum::Vec2 position, float size);
             ~Object();
             float getRadius() { return radius_; }
-               insectum::Vec2 getPosition() { return position_; }
+            insectum::Vec2 getPosition() { return position_; }
             insectum::Vec2 getVelocity();
             bool isFixed(){ return fixed_; }
 
@@ -23,6 +23,8 @@ namespace insectum::verlet
             void setFixed(bool fixed) { fixed_ = fixed; }
 
             void update(float dt);
+
+            friend class Container;
 
         private:
             float radius_;
